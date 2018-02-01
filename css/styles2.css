@@ -1,0 +1,46 @@
+body {
+  background-color: #0000;
+  background-image: url("img/cover.png");
+
+}
+
+#myFavoriteImage {
+  width: 90%;
+
+}
+
+img {
+    position: absolute;
+    left: 280px;
+    top: 110px;
+    z-index: -1;
+}
+
+h1{
+  color: #000000;
+  text-align: right;
+  margin-right: 30px;
+  margin-left: 120px;
+  font-family: 'Open Sans Condensed', sans-serif;sans-serif;
+  font-size: 2.70em;
+  font-weight: 600;
+  max-width: 2560px
+}
+p {
+  text-align: left;
+  margin-right: 30px;
+  margin-left: 120px;
+}
+p{
+  color: #000000;
+  font-family: "futura-pt", helvetica, sans-serif;
+  font-size: 1.35em;
+  font-weight: 300;
+  max-width: 2560px;
+}
+p.boldText {
+  font-weight: bold;
+}
+p#italicsText {
+  font-style: italic;
+}
