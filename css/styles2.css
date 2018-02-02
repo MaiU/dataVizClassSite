@@ -5,13 +5,31 @@ body {
 }
 
 #myFavoriteImage {
-  width: 50%;
+  width: 70%;
 
+}
+
+#myFavoriteSide{
+  height: 85%;
+  width:40%;
+  position: absolute;
+  left: 120px;
+  top: 110px;
+  z-index: -1;
+
+}
+#myBio{
+  width: 40%;
+  height: 40%;
+  position: absolute;
+  right: 350px;
+  top: 280px;
+  z-index: -1;
 }
 
 img {
     position: absolute;
-    left: 280px;
+    right: 30px;
     top: 110px;
     z-index: -1;
 }
@@ -30,7 +48,10 @@ p {
   text-align: left;
   margin-right: 30px;
   margin-left: 120px;
+  height: 150px;
+
 }
+
 p{
   color: #000000;
   font-family: "futura-pt", helvetica, sans-serif;
@@ -43,4 +64,51 @@ p.boldText {
 }
 p#italicsText {
   font-style: italic;
+}
+
+#bio{
+
+  width: 40%;
+  position: absolute;
+  right: 300px;
+  top: 280px;
+  z-index: -1;
+}
+
+p1{
+  text-align: left;
+  margin-right: 30px;
+  margin-left: 120px;
+  height: 125px;
+}
+
+p1{
+  color: #000000;
+  font-family: "futura-pt", helvetica, sans-serif;
+  font-size: 1.35em;
+  font-weight: 300;
+  max-width: 2560px;
+}
+
+p2{
+  text-align: left;
+  margin-right: 30px;
+  margin-left: 230px;
+  height: 800px;
+
+  }
+
+p2{
+  color: #000000;
+  font-family: "futura-pt", helvetica, sans-serif;
+  font-size: 1.35em;
+  font-weight: 300;
+  max-width: 2560px;
+}
+
+p3{
+  text-align: left;
+  margin-right: 30px;
+  margin-left: 120px;
+  height: 125px;
 }
