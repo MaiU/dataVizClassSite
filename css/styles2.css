@@ -75,6 +75,14 @@ p#italicsText {
   z-index: -1;
 }
 
+#word{
+  width: 70%;
+  position: absolute;
+  right: 100px;
+  top: 850px;
+  z-index: -1;
+}
+
 p1{
   text-align: left;
   margin-right: 30px;
