@@ -61,8 +61,6 @@ function draw(){
 
 
 
-
-
     for (var i = 0; i < bubbleTable.getRowCount(); i++){
       var b = bubbleTable.getNum(i, 'build_num');
       var c = bubbleTable.getNum(i, 'clus');
