@@ -66,6 +66,13 @@ function drawLegend(){
     ellipse(1475, 90, 25, 25);
     fill(255, 105, 180);
     ellipse(1475, 130, 25, 25)
+    c = color('hsba(0, 100%, 0%, 0.2)');
+    fill(c)
+    ellipse(1475, 347, 15, 15);
+    ellipse(1475, 340, 30, 30);
+    ellipse(1475, 325, 60, 60);
+    ellipse(1475, 310, 90, 90);
+
 }
 
 
