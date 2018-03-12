@@ -1,3 +1,4 @@
+
 //loading data
 
 function preload(){
@@ -26,12 +27,12 @@ var startBld = 0;
 var endBld = 2650;
 var maxSize = 25;
 var minSize = 5;
-var buttonLabels = ['>838 buildigns', '461-837 buildings', '155-460', '<155 buildings'];
+var buttonLabels = ['All', '<155 buildings', '155-460 buildings', '461-837 buildings', '>838 buildigns'];
 var selectedButton = 0;
 var textXPos = 1275;
 var textYorPos = 200;
 
-var buttonStartX = 1200;
+var buttonStartX = 1275;
 var buttonStartY = 200;
 var buttonLength = 120;
 var buttonHeight = 20;
@@ -42,11 +43,12 @@ var buildnumber2 = new p5.Table;
 var buildnumber3 = new p5.Table;
 var buildnumber4 = new p5.Table;
 
+
 function drawLegend(){
     background(255);
-    fill(192, 192, 192)
-    line (625, 30, 625, 750)
-    line(30, 375, 1300, 375)
+    line (625, 30, 625, 750);
+    line(30, 375, 1300, 375);
+    fill(192, 192, 192);
     textSize(20);
     text("Inwood", 640, 45);
     text("Downtown", 640, 740);
@@ -57,11 +59,12 @@ function drawLegend(){
     text("1900-1917", 1275, 55);
     text("1918-1975", 1275, 95);
     text(">1975", 1275, 135);
-    fill(255, 204, 0);
+    noStroke();
+    fill(255, 215, 0);
     ellipse(1475, 50, 25, 25);
-    fill(30, 144, 255);
+    fill(175, 238, 238);
     ellipse(1475, 90, 25, 25);
-    fill(255, 20, 147);
+    fill(255, 105, 180);
     ellipse(1475, 130, 25, 25)
 }
 
@@ -83,7 +86,7 @@ function createNewTable(){
       newRow1.setNum('build_num', bubbleTable.getNum(i, 'build_num'));
       newRow1.setNum('x', bubbleTable.getNum(i, 'x'));
     }
-    else if (bubble_size >154 && bubble_size <460){
+    else if (bubble_size >154 && bubble_size < 460){
       var newRow2 =buildnumber2.addRow();
       newRow2.setNum('build_num', bubbleTable.getNum(i, 'build_num'));
       newRow2.setNum('x', bubbleTable.getNum(i, 'x'));
@@ -102,22 +105,21 @@ function createNewTable(){
     print ("code is stupid");
   }
 
-
 // ***** Draw buttons function ***** //
 function drawButtons(){
-  textAlign(CENTER, TOP);
+  textAlign(LEFT, TOP);
   for (var i = 0; i < buttonLabels.length; i++) {
     if (selectedButton == i) {
-      fill(200);
+      fill(255);
     }
     else {
-      fill(240);
+      fill(255);
     }
-    stroke(100);
-    rect(buttonStartX + i * (buttonLength + buttonSpacing), buttonStartY, buttonLength, buttonHeight);
-    fill(0);
+    stroke(255);
+    rect(buttonStartX, buttonStartY + i * (buttonHeight + buttonSpacing), buttonLength, buttonHeight);
+    fill(192);
     noStroke();
-    text(buttonLabels[i], buttonStartX + i * (buttonLength + buttonSpacing) + buttonLength/2, buttonStartY + 2);
+    text(buttonLabels[i], buttonStartX, buttonStartY + i * (buttonHeight + buttonSpacing));
   }
 }
 
@@ -140,219 +142,289 @@ function drawBubbles(){
       var westEast = bubbleTable.getNum(i, 'locWE');
       var year = bubbleTable.getNum(i, 'x');
       var year1 = parseInt(year);
-      var yearPosition = map(year1, 1900, 2040, 50, 1200);
+      var yearPositionW1 = map(600, 575, 500, 550, 450);
+      var yearPositionW2 = map(525, 550, 475, 525, 375);
+      var yearPositionW3 = map(450, 475, 400, 450, 300);
+      var yearPositionE1 = map(625, 625, 750, 700, 850);
+      var yearPositionE2 = map(700, 700, 900, 800, 950);
+      var yearPositionE3 = map(775, 775, 975, 875, 1025);
       var locPosition = map(northSouth, 0, 15, 50, 800);
-      if((b < 154) && (c = 1) && (westEast = 1)){
-          fill(190, 190, 190);
-          ellipse(650-i, locPosition, 15, 15);
+      if ((selectedButton == 0) && (b < 154) && (c == 1) && (westEast == 0)){
+                fill(255, 215, 0);
+                noStroke();
+                ellipse(yearPositionW1-i*0.5, locPosition, 15, 15);
+              }
+              else if ((selectedButton == 0) && (b < 154) && (c == 2) && (westEast == 0)){
+                fill(175, 238, 238);
+                noStroke();
+                ellipse(yearPositionW2-i*2, locPosition, 15, 15);
+              }
+              else if ((selectedButton == 0) && (b < 154) && (c == 3) && (westEast == 0)){
+                fill(255, 105, 180);
+                noStroke();
+                ellipse(yearPositionW3-i*4, locPosition, 15, 15);
+              }
+              else if ((selectedButton == 0) && (b > 154) && (b < 460) && (c == 1) && (westEast == 0)){
+                fill(255, 215, 0);
+                noStroke();
+                ellipse(yearPositionW1-i*0.5, locPosition, 30, 30);
+              }
+              else if ((selectedButton == 0) && (b > 154) && (b < 460) && (c == 2) && (westEast == 0)){
+                fill(175, 238, 238);
+                noStroke();
+                ellipse(yearPositionW2-i*3, locPosition, 30, 30);
+              }
+              else if ((selectedButton == 0) && (b > 154) && (b < 460) && (c == 3) && (westEast == 0)){
+                fill(255, 105, 180);
+                noStroke();
+                ellipse(yearPositionW3-i*6, locPosition, 30, 30);
+              }
+              else if((selectedButton == 0) && (b > 460) && (b < 837) && (c == 1) && (westEast == 0)){
+                fill(255, 215, 0);
+                noStroke();
+                ellipse (yearPositionW1-i*0.5, locPosition, 60, 60);
+              }
+              else if((selectedButton == 0) && (b > 460) && (b < 837) && (c == 2) && (westEast == 0)){
+                fill(175, 238, 238);
+                noStroke();
+                ellipse (yearPositionW2-i*4, locPosition, 60, 60);
+              }
+              else if((selectedButton == 0) && (b > 460) && (b < 837) && (c == 3) && (westEast == 0)){
+                fill(255, 105, 180);
+                noStroke();
+                ellipse (yearPositionW3-i*8, locPosition, 60, 60);
+              }
+              else if((selectedButton == 0) && (b > 837) && (c == 1) && (westEast == 0)){
+                fill(255, 215, 0);
+                noStroke();
+                ellipse(yearPositionW1-i*30, locPosition, 90, 90);
+              }
+              else if ((selectedButton == 0) && (b < 837) && (c == 2) && (westEast == 0)){
+                fill(175, 238, 238);
+                noStroke();
+                ellipse(yearPositionW2-i*2, locPosition, 90, 90);
+              }
+              else if ((selectedButton == 0) && (b < 837) && (c == 3) && (westEast == 0)){
+                fill(255, 105, 180);
+                noStroke();
+                ellipse(yearPositionW3-i*3, locPosition, 90, 90);
+              }
+              else if ((selectedButton == 0) && (b < 154) && (c == 1) && (westEast == 1)){
+                  fill(255, 215, 0);
+                  noStroke();
+                  ellipse(yearPositionE1+i*0.5, locPosition, 15, 15);
+              }
+                else if ((selectedButton == 0) && (b < 154) && (c == 2) && (westEast == 1)){
+                  fill(175, 238, 238);
+                  noStroke();
+                  ellipse(yearPositionE2+i*2, locPosition, 15, 15);
+                }
+                else if ((selectedButton == 0) && (b < 154) && (c == 3) && (westEast == 1)){
+                  fill(255, 105, 180);
+                  noStroke();
+                  ellipse(yearPositionE3+i*4, locPosition, 15, 15);
+                }
+                else if ((selectedButton == 0) && (b > 154) && (b < 460) && (c == 1) && (westEast == 1)){
+                  fill(255, 215, 0);
+                  noStroke();
+                  ellipse(yearPositionE1+i*0.5, locPosition, 30, 30);
+                }
+                else if ((selectedButton == 0) && (b > 154) && (b < 460) && (c == 2) && (westEast == 1)){
+                  fill(175, 238, 238);
+                  noStroke();
+                  ellipse(yearPositionE2+i*3, locPosition, 30, 30);
+                }
+                else if ((selectedButton == 0) && (b > 154) && (b < 460) && (c == 3) && (westEast == 1)){
+                  fill(255, 105, 180);
+                  noStroke();
+                  ellipse(yearPositionE3+i*6, locPosition, 30, 30);
+                }
+                  else if((selectedButton == 0) && (b > 460) && (b < 837) && (c == 1) && (westEast == 1)){
+                    fill(255, 215, 0);
+                    noStroke();
+                    ellipse (yearPositionE1+i*0.5, locPosition, 60, 60);
+                  }
+                  else if((selectedButton == 0) && (b > 460) && (b < 837) && (c == 2) && (westEast == 1)){
+                    fill(175, 238, 238);
+                    noStroke();
+                    ellipse (yearPositionE2+i*4, locPosition, 60, 60);
+                  }
+                  else if((selectedButton == 0) && (b > 460) && (b < 837) && (c == 3) && (westEast == 1)){
+                    fill(255, 105, 180);
+                    noStroke();
+                    ellipse (yearPositionE3+i*8, locPosition, 60, 60);
+                  }
+                  else if((selectedButton == 0) && (b > 837) && (c == 1) && (westEast == 1)){
+                    fill(255, 215, 0);
+                    noStroke();
+                    ellipse(yearPositionE1+i*30, locPosition, 90, 90);
+                  }
+                  else if ((selectedButton == 0) && (b < 837) && (c == 2) && (westEast == 1)){
+                    fill(175, 238, 238);
+                    noStroke();
+                    ellipse(yearPositionE2+i*2, locPosition, 90, 90);
+                  }
+                  else if ((selectedButton == 0) && (b < 837) && (c == 3) && (westEast == 1)){
+                    fill(255, 105, 180);
+                    noStroke();
+                    ellipse(yearPositionE3+i*3, locPosition, 90, 90);
+                  }
+            //selection
+              else if ((selectedButton == 1) && (b < 154) && (c == 1) && (westEast == 0)){
+                  fill(255, 215, 0);
+                  noStroke();
+                  ellipse(yearPositionW1-i*0.5, locPosition, 15, 15);
+                }
+                else if ((selectedButton == 1) && (b < 154) && (c == 2) && (westEast == 0)){
+                  fill(175, 238, 238);
+                  noStroke();
+                  ellipse(yearPositionW2-i*2, locPosition, 15, 15);
+                }
+                else if ((selectedButton == 1) && (b < 154) && (c == 3) && (westEast == 0)){
+                  fill(255, 105, 180);
+                  noStroke();
+                  ellipse(yearPositionW3-i*4, locPosition, 15, 15);
+                }
+                else if ((selectedButton == 2) && (b > 154) && (b < 460) && (c == 1) && (westEast == 0)){
+                  fill(255, 215, 0);
+                  noStroke();
+                  ellipse(yearPositionW1-i*0.5, locPosition, 30, 30);
+                }
+                else if ((selectedButton == 2) && (b > 154) && (b < 460) && (c == 2) && (westEast == 0)){
+                  fill(175, 238, 238);
+                  noStroke();
+                  ellipse(yearPositionW2-i*3, locPosition, 30, 30);
+                }
+                else if ((selectedButton == 2) && (b > 154) && (b < 460) && (c == 3) && (westEast == 0)){
+                  fill(255, 105, 180);
+                  noStroke();
+                  ellipse(yearPositionW3-i*6, locPosition, 30, 30);
+                }
+                  else if((selectedButton == 3) && (b > 460) && (b < 837) && (c == 1) && (westEast == 0)){
+                    fill(255, 215, 0);
+                    noStroke();
+                    ellipse (yearPositionW1-i*0.5, locPosition, 60, 60);
+                  }
+                  else if((selectedButton == 3) && (b > 460) && (b < 837) && (c == 2) && (westEast == 0)){
+                    fill(175, 238, 238);
+                    noStroke();
+                    ellipse (yearPositionW2-i*4, locPosition, 60, 60);
+                  }
+                  else if((selectedButton == 3) && (b > 460) && (b < 837) && (c == 3) && (westEast == 0)){
+                    fill(255, 105, 180);
+                    noStroke();
+                    ellipse (yearPositionW3-i*8, locPosition, 60, 60);
+                  }
+                  else if((selectedButton == 4) && (b > 837) && (c == 1) && (westEast == 0)){
+                    fill(255, 215, 0);
+                    noStroke();
+                    ellipse(yearPositionW1-i*30, locPosition, 90, 90);
+                  }
+                  else if ((selectedButton == 4) && (b > 837) && (c == 2) && (westEast == 0)){
+                    fill(175, 238, 238);
+                    noStroke();
+                    ellipse(yearPositionW2-i*2, locPosition, 90, 90);
+                  }
+                  else if ((selectedButton == 4) && (b > 837) && (c == 3) && (westEast == 0)){
+                    fill(255, 105, 180);
+                    noStroke();
+                    ellipse(yearPositionW3-i*3, locPosition, 90, 90);
+                  }
+                  else if ((selectedButton == 1) && (b < 154) && (c == 1) && (westEast == 1)){
+                      fill(255, 215, 0);
+                      noStroke();
+                      ellipse(yearPositionE1+i*0.5, locPosition, 15, 15);
+                  }
+                  else if ((selectedButton == 1) && (b < 154) && (c == 2) && (westEast == 1)){
+                    fill(175, 238, 238);
+                    noStroke();
+                    ellipse(yearPositionE2+i*2, locPosition, 15, 15);
+                  }
+                  else if ((selectedButton == 1) && (b < 154) && (c == 3) && (westEast == 1)){
+                    fill(255, 105, 180);
+                    noStroke();
+                    ellipse(yearPositionE3+i*4, locPosition, 15, 15);
+                  }
+                  else if ((selectedButton == 2) && (b > 154) && (b < 460) && (c == 1) && (westEast == 1)){
+                    fill(255, 215, 0);
+                    noStroke();
+                    ellipse(yearPositionE1+i*0.5, locPosition, 30, 30);
+                  }
+                  else if ((selectedButton == 2) && (b > 154) && (b < 460) && (c == 2) && (westEast == 1)){
+                    fill(175, 238, 238);
+                    noStroke();
+                    ellipse(yearPositionE2+i*3, locPosition, 30, 30);
+                  }
+                  else if ((selectedButton == 2) && (b > 154) && (b < 460) && (c == 3) && (westEast == 1)){
+                    fill(255, 105, 180);
+                    noStroke();
+                    ellipse(yearPositionE3+i*6, locPosition, 30, 30);
+                  }
+                  else if((selectedButton == 3) && (b > 460) && (b < 837) && (c == 1) && (westEast == 1)){
+                    fill(255, 215, 0);
+                    noStroke();
+                    ellipse (yearPositionE1+i*0.5, locPosition, 60, 60);
+                  }
+                  else if((selectedButton == 3) && (b > 460) && (b < 837) && (c == 2) && (westEast == 1)){
+                    fill(175, 238, 238);
+                    noStroke();
+                    ellipse (yearPositionE2+i*4, locPosition, 60, 60);
+                  }
+                  else if((selectedButton == 3) && (b > 460) && (b < 837) && (c == 3) && (westEast == 1)){
+                    fill(255, 105, 180);
+                    noStroke();
+                    ellipse (yearPositionE3+i*8, locPosition, 60, 60);
+                  }
+                  else if((selectedButton == 4) && (b > 837) && (c == 1) && (westEast == 1)){
+                    fill(255, 215, 0);
+                    noStroke();
+                    ellipse(yearPositionE1+i*30, locPosition, 90, 90);
+                  }
+                  else if ((selectedButton == 4) && (b > 837) && (c == 2) && (westEast == 1)){
+                    fill(175, 238, 238);
+                    noStroke();
+                    ellipse(yearPositionE2+i*2, locPosition, 90, 90);
+                  }
+                  else if ((selectedButton == 4) && (b > 837) && (c == 3) && (westEast == 1)){
+                    fill(255, 105, 180);
+                    noStroke();
+                    ellipse(yearPositionE3+i*3, locPosition, 90, 90);
+                  }
+          }
         }
-        else if ((b >154) && (b < 460) && (c == 1) && (westEast ==1)){
-          fill(190, 190, 190);
-          ellipse(600-i, locPosition, 30, 30);
-        }
-          else if((b > 460) && (b < 837) && (c == 1) && (westEast ==1)){
-            fill(190, 190, 190);
-            ellipse(550-i, locPosition, 60, 60);
-          }
-          else if((b>837) && (c == 1) && (westEast ==1)){
-            fill(190, 190, 190);
-            ellipse(500-i, locPosition, 90, 90);
-          }
-          else if ((b < 154) && (c == 2) && (westEast == 1)){
-            fill(190, 190, 190);
-            ellipse(400-i, locPosition, 15, 15);
-          }
-          else if ((b >154) && (b < 460) && (c == 2) && (westEast ==1)) {
-            fill(190, 190, 190, );
-            ellipse(350-i, locPosition, 30, 30);
-          }
-          else if ((b >460) && (b < 837) && (c == 2) && (westEast ==1)) {
-            fill(190, 190, 190);
-            ellipse(300-i, locPosition, 60, 60);
-          }
-          else if((b>837) && (c == 2) && (westEast == 1)){
-            fill(190, 190, 190);
-            ellipse(250-i, locPosition, 90, 90);
-          }
-          else if ((b < 154) && (c == 3) && (westEast == 1)){
-            fill(190, 190, 190);
-            ellipse(200-i, locPosition, 15, 15);
-          }
-          else if ((b >154) && (b < 460) && (c == 3) && (westEast ==1)){
-            fill(190, 190, 190);
-            ellipse(150-i, locPosition, 30, 30);
-          }
-          else if ((b >460) && (b < 837) && (c == 3) && (westEast ==1)) {
-            fill(190, 190, 190);
-            ellipse(100-i, locPosition, 60, 60);
-          }
-          else if((b>837) && (c == 3) && (westEast == 1)){
-            fill(255, 20, 147);
-            ellipse(50-i, locPosition, 90, 90);
-          }
-          else if ((b < 154) && (c = 1) && (westEast ==0)){
-              fill(190, 190, 190);
-              ellipse(700+i, locPosition, 15, 15);
-          }
-          else if ((b >154) && (b < 460) && (c == 1) && (westEast ==0)){
-            fill(190, 190, 190);
-            ellipse(750+i, locPosition, 30, 30);
-          }
-          else if((b > 460) && (b < 837) && (c == 1) && (westEast ==0)){
-            fill(190, 190, 190);
-            ellipse(550-i, locPosition, 60, 60);
-          }
-          else if((b>837) && (c == 1) && (westEast ==0)){
-            fill(190, 190, 190);
-            ellipse(800+i, locPosition, 90, 90);
-          }
-          else if ((b < 154) && (c == 2) && (westEast == 0)){
-            fill(190, 190, 190);
-            ellipse(850+i, locPosition, 15, 15);
-          }
-          else if ((b >460) && (b < 837) && (c == 2) && (westEast ==0)) {
-            fill(190, 190, 190);
-            ellipse(900+i, locPosition, 30, 30);
-          }
-          else if((b>837) && (c == 2) && (westEast ==0)){
-            fill(190, 190, 190);
-            ellipse(950+i, locPosition, 90, 90);
-          }
-          else if ((b < 154) && (c == 3) && (westEast == 0)){
-            fill(190, 190, 190);
-            ellipse(1000+i, locPosition, 15, 15);
-          }
-          else if ((b >154) && (b < 460) && (c == 3) && (westEast ==0)){
-            fill(190, 190, 190);
-            ellipse(1050+i, locPosition, 30, 30);
-          }
-          else if ((b >460) && (b < 837) && (c == 3) && (westEast ==0)) {
-            fill(190, 190, 190);
-            ellipse(1100+i, locPosition, 60, 60);
-          }
-          else if((b>837) && (c == 3) && (westEast ==0)){
-            fill(190, 190, 190);
-            ellipse(1150+i, locPosition, 90, 90);
-         }
-          else if ((selectedButton == 0) && (c = 1) && (westEast = 1)){
-            fill(255, 204, 0);
-            ellipse(650-i, locPosition, 15, 15);
-          }
-          else if ((selectedButton == 1) && (c == 1) && (westEast ==1)){
-            fill(255, 204, 0);
-            ellipse(600-i, locPosition, 30, 30);
-          }
-            else if((selectedButton == 2) && (c == 1) && (westEast ==1)){
-              fill(255, 204, 0);
-              ellipse(550-i, locPosition, 60, 60);
-            }
-            else if((selectedButton == 3) && (c == 1) && (westEast ==1)){
-              fill(255, 204, 0);
-              ellipse(500-i, locPosition, 90, 90);
-            }
-            else if ((selectedButton == 0) && (c == 2) && (westEast == 1)){
-              fill(30, 144, 255);
-              ellipse(400-i, locPosition, 15, 15);
-            }
-            else if ((selectedButton == 1) && (b < 460) && (c == 2) && (westEast ==1)) {
-              fill(30, 144, 255);
-              ellipse(350-i, locPosition, 30, 30);
-            }
-            else if ((selectedButton == 2) && (b < 837) && (c == 2) && (westEast ==1)) {
-              fill(30, 144, 255);
-              ellipse(300-i, locPosition, 60, 60);
-            }
-            else if((selectedButton == 3) && (c == 2) && (westEast == 1)){
-              fill(30, 144, 255);
-              ellipse(250-i, locPosition, 90, 90);
-            }
-            else if ((selectedButton == 0) && (c == 3) && (westEast == 1)){
-              fill(255, 20, 147);
-              ellipse(200-i, locPosition, 15, 15);
-            }
-            else if ((selectedButton == 1) && (b < 460) && (c == 3) && (westEast ==1)){
-              fill(255, 20, 147);
-              ellipse(150-i, locPosition, 30, 30);
-            }
-            else if ((selectedButton == 2) && (b < 837) && (c == 3) && (westEast ==1)) {
-              fill(255, 20, 147);
-              ellipse(100-i, locPosition, 60, 60);
-            }
-            else if((selectedButton == 3) && (c == 3) && (westEast == 1)){
-              fill(255, 20, 147);
-              ellipse(50-i, locPosition, 90, 90);
-            }
-            else if ((selectedButton == 0) && (c = 1) && (westEast ==0)){
-                fill(255, 204, 0);
-                ellipse(700+i, locPosition, 15, 15);
-            }
-            else if ((selectedButton == 1) && (b < 460) && (c == 1) && (westEast ==0)){
-              fill(255, 204, 0);
-              ellipse(750+i, locPosition, 30, 30);
-            }
-            else if((selectedButton == 2) && (b < 837) && (c == 1) && (westEast ==0)){
-              fill(255, 204, 0);
-              ellipse(550-i, locPosition, 60, 60);
-            }
-            else if((selectedButton == 3) && (c == 1) && (westEast ==0)){
-              fill(255, 204, 0);
-              ellipse(800+i, locPosition, 90, 90);
-            }
-            else if ((selectedButton == 0) && (c == 2) && (westEast == 0)){
-              fill(30, 144, 255);
-              ellipse(850+i, locPosition, 15, 15);
-            }
-            else if ((selectedButton == 1) && (c == 2) && (westEast ==0)) {
-              fill(30, 144, 255);
-              ellipse(900+i, locPosition, 30, 30);
-            }
-            else if ((selectedButton == 2) && (c == 2) && (westEast ==0)){
-              fill(30, 144, 255);
-              ellipse(900+i, locPosition, 60, 60);
-            }
-            else if ((selectedButton == 3) && (c == 2) && (westEast ==0)){
-              fill(30, 144, 255);
-              ellipse(950+i, locPosition, 90, 90);
-            }
-            else if ((selectedButton == 0) && (c == 3) && (westEast == 0)){
-              fill(255, 20, 147);
-              ellipse(1000+i, locPosition, 15, 15);
-            }
-            else if ((selectedButton == 1) && (b < 460) && (c == 3) && (westEast ==0)){
-              fill(255, 20, 147);
-              ellipse(1050+i, locPosition, 30, 30);
-            }
-            else if ((selectedButton == 2) && (c == 3) && (westEast ==0)) {
-              fill(255, 20, 147);
-              ellipse(1100+i, locPosition, 60, 60);
-            }
-            else {
-              fill(255, 20, 147);
-              ellipse(1150+i, locPosition, 90, 90);
-            }
-
-          }
-          }
 
 function draw(){
-  background(255);
   drawLegend();
   drawBubbles();
   drawButtons();
 }
 
+
 // ****** Mouse pressed function ******* //
 function mousePressed(){
   if (mouseX >= buttonStartX && mouseX <= (buttonStartX + buttonLength) && mouseY >= buttonStartY && mouseY <= (buttonStartY + buttonHeight)) {
     selectedButton = 0;
+    print("yayyay");
     redraw();
   }
-  else if (mouseX >= (buttonStartX + buttonLength + buttonSpacing) && mouseX <= (buttonStartX + buttonLength * 2 + buttonSpacing) && mouseY >= buttonStartY && mouseY <= (buttonStartY + buttonHeight)){
+  else if (mouseX >= buttonStartX && mouseX <= (buttonStartX + buttonLength) && mouseY >= (buttonStartY + buttonHeight + buttonSpacing) && mouseY <= (buttonStartY + buttonHeight * 2 + buttonSpacing)){
     selectedButton = 1;
+    print("yay");
     redraw();
   }
-  else if (mouseX >= (buttonStartX + buttonLength + buttonSpacing) && mouseX <= (buttonStartX + buttonLength * 3 + buttonSpacing * 2) && mouseY >= buttonStartY && mouseY <= (buttonStartY + buttonHeight)){
+  else if (mouseX >= buttonStartX && mouseX <= (buttonStartX + buttonLength) && mouseY >= (buttonStartY + buttonHeight + buttonSpacing) && mouseY <= (buttonStartY + buttonHeight * 3 + buttonSpacing * 2)){
     selectedButton = 2;
+    print("yay yay yay")
+    redraw();
+  }
+  else if (mouseX >= buttonStartX && mouseX <= (buttonStartX + buttonLength) && mouseY >= (buttonStartY + buttonHeight + buttonSpacing) && mouseY <= (buttonStartY + buttonHeight * 4 + buttonSpacing * 3)){
+    selectedButton = 3;
+    print("yay yay yay yay")
+    redraw();
+  }
+  else if (mouseX >= buttonStartX && mouseX <= (buttonStartX + buttonLength) && mouseY >= (buttonStartY + buttonHeight + buttonSpacing) && mouseY <= (buttonStartY + buttonHeight * 5 + buttonSpacing * 4)){
+    selectedButton = 4;
+    print("yay yay yay yay yay")
     redraw();
   }
 }

@@ -52,6 +52,8 @@ function draw(){
     ellipse(1475, 240, 30, 30);
     ellipse(1475, 225, 60, 60);
     ellipse(1475, 210, 90, 90);
+
+//*Buttons*//
     fill(255, 204, 0);
     ellipse(1475, 50, 25, 25);
     fill(30, 144, 255);
@@ -60,7 +62,7 @@ function draw(){
     ellipse(1475, 130, 25, 25);
 
 
-
+//*Bubble chart*//
     for (var i = 0; i < bubbleTable.getRowCount(); i++){
       var b = bubbleTable.getNum(i, 'build_num');
       var c = bubbleTable.getNum(i, 'clus');
