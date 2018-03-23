@@ -402,8 +402,8 @@ function drawBubbles(){
 
 function draw(){
   drawLegend();
-  drawBubbles();
   drawButtons();
+  drawBubbles();
 }
 
 
